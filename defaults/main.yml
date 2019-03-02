@@ -1,2 +1,10 @@
 ---
 # defaults file for mrdatamapper.akademiano_nginx_proxy
+
+nginx_proxy_sites: []
+#  - name:  site
+#    hostname: site.example.com
+#    aliases: 
+#      - www.site.example.com
+#    ssl: true
+#    backend: backend1.site.example.com

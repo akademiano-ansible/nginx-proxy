@@ -1,0 +1,20 @@
+---
+- name: Create upstream (backend)
+  template:
+    dest: "/etc/nginx/conf.d/01-proxy-upstream-{{site.name}}.conf"
+    src: upstream.conf.j2
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: nginx restart
+
+- name: Create site
+  template:
+    dest: "/etc/nginx/sites/proxy-{{site.name}}.site"
+    src: proxy.site.j2
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: nginx restart

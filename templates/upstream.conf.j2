@@ -1,0 +1,4 @@
+upstream proxy-backend-{{site.name}} {
+  server {{site.backend}};
+  keepalive 16;
+}
