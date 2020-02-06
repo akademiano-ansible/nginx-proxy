@@ -1,32 +1,35 @@
----
-
 - name: Ansible find old proxy upstream files for delete
   find:
     paths: /etc/nginx/conf.d/
     patterns: 01-proxy-upstream-*.conf
   register: proxy_upstreams_for_delete
+  become: yes
 
 - name: Ansible remove old proxy upstream files
   file:
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ proxy_upstreams_for_delete.files }}"
+  become: yes
 
 - name: Ansible find old proxy sites files for delete
   find:
     paths: /etc/nginx/sites/
     patterns: proxy-*.site
   register: proxy_sites_for_delete
+  become: yes
 
 - name: Ansible remove old proxy upstream files
   file:
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ proxy_sites_for_delete.files }}"
+  become: yes
 
-- name: "process sites {{site.name}}"
+- name: "process sites"
   include_tasks: site.yml
-  loop: "{{nginx_proxy_sites}}"
+  loop: "{{ nginx_proxy_sites }}"
   loop_control:
     loop_var: site
-    label: "Create proxy site for {{site.name}}"
+    label: "Create proxy site for {{ site.name }}"
+  become: yes

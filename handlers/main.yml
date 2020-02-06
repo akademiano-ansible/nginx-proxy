@@ -1,6 +1,7 @@
 ---
 # handlers file for mrdatamapper.akademiano_nginx_proxy
 - name: nginx restart
-  service: 
+  service:
     name: nginx
     state: restarted
+  become: yes
