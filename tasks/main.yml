@@ -32,4 +32,3 @@
   loop_control:
     loop_var: site
     label: "Create proxy site for {{ site.name }}"
-  become: yes
